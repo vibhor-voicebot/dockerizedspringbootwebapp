@@ -9,13 +9,13 @@ trigger:
 variables:
 
   # Azure Resource Manager connection created during pipeline creation
-  azureSubscription: 'jvmnlparm'
+  azureSubscription: 'dockerizedarm'
 
   # Web app name
-  webAppName: 'jvmnlpservice'
+  webAppName: 'dockerizedservice'
 
   # projnameprefix
-  projnameprefix: 'jvmnlp'
+  projnameprefix: 'dockerized'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
