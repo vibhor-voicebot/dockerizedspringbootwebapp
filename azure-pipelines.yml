@@ -3,8 +3,13 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
-trigger:
-- master
+#trigger:
+#- master
+
+pr:
+  branches:
+    include:
+    - master
 
 variables:
 
@@ -66,7 +71,7 @@ stages:
     - task: WorkItemUpdater@2
       inputs:
         workitemsSource: 'Build'
-        workItemType: 'Task'
+        workItemType: 'Task, Epic, Product Backog Item'
         workItemKanbanState: 'Dev Done'
         updateAssignedTo: 'Unassigned'
         updateAssignedToWith: 'Requester'
@@ -85,7 +90,7 @@ stages:
     - task: WorkItemUpdater@2
       inputs:
         workitemsSource: 'Build'
-        workItemType: 'Task'
+        workItemType: 'Task, Epic, Product Backog Item'
         workItemKanbanState: 'QA Done'
         updateAssignedTo: 'Unassigned'
         updateAssignedToWith: 'Requester'
