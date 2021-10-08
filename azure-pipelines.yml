@@ -75,8 +75,8 @@ stages:
     - task: WorkItemUpdater@2
       inputs:
         workitemsSource: 'Build'
-        workItemType: 'Task, Epic, Product Backlog Item'
-        workItemState: Approved
+        workItemType: 'Task, User Story'
+        workItemState: 'Resolved'
         workItemKanbanState: 'Dev Done'
         updateAssignedTo: 'Unassigned'
         linkBuild: true
@@ -97,8 +97,8 @@ stages:
     - task: WorkItemUpdater@2
       inputs:
         workitemsSource: 'Build'
-        workItemType: 'Task, Epic, Product Backlog Item'
-        workItemState: Committed
+        workItemType: 'Task, User Story'
+        workItemState: 'Resolved'
         workItemKanbanState: 'QA Done'
         updateAssignedTo: 'Unassigned'
         updateAssignedToWith: 'Requester'
