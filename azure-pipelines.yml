@@ -62,7 +62,18 @@ stages:
         codeCoverageToolOption: 'JaCoCo'
         sonarCloudRunAnalysis: true
         sqMavenPluginVersionChoice: 'latest'
-        
+
+    - task: WorkItemUpdater@2
+      inputs:
+        workitemsSource: 'Build'
+        workItemType: 'Task'
+        workItemKanbanState: 'Dev Done'
+        updateAssignedTo: 'Unassigned'
+        updateAssignedToWith: 'Requester'
+        updateFields: 'System.Description, Maven Build & Packaging is completed'
+        addTags: |
+          MavenBuild
+          MavenPackaging
  
     - task: SonarCloudAnalyze@1
  
@@ -70,7 +81,19 @@ stages:
       displayName: 'Publish results on build summary'
       inputs:
         pollingTimeoutSec: '300'
- 
+
+    - task: WorkItemUpdater@2
+      inputs:
+        workitemsSource: 'Build'
+        workItemType: 'Task'
+        workItemKanbanState: 'QA Done'
+        updateAssignedTo: 'Unassigned'
+        updateAssignedToWith: 'Requester'
+        updateFields: 'System.Description, SonarCloud Code Coverage & Quality code analysis is completed'
+        addTags: |
+          MavenBuild
+          MavenPackaging
+  
     - task: CopyFiles@2
       displayName: 'Copy Files to artifact staging directory'
       inputs:
