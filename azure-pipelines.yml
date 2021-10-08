@@ -82,9 +82,6 @@ stages:
         linkBuild: true
         updateAssignedToWith: 'Requester'
         updateFields: 'System.Description, Maven Build & Packaging is completed'
-        addTags: |
-          MavenBuild
-          MavenPackaging
 
 
     - task: SonarCloudAnalyze@1
@@ -103,9 +100,7 @@ stages:
         updateAssignedTo: 'Unassigned'
         updateAssignedToWith: 'Requester'
         updateFields: 'System.Description, SonarCloud Code Coverage & Quality code analysis is completed'
-        addTags: |
-          MavenBuild
-          MavenPackaging
+
   
     - task: CopyFiles@2
       displayName: 'Copy Files to artifact staging directory'
