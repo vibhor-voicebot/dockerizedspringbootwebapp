@@ -53,6 +53,7 @@ stages:
       displayName: 'Maven Package'
       inputs:
       
+      
         mavenPomFile: 'pom.xml'
         goals: 'clean verify sonar:sonar package'
         #goals: 'package'
