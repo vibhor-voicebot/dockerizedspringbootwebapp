@@ -72,14 +72,17 @@ stages:
       inputs:
         workitemsSource: 'Build'
         workItemType: 'Task, Epic, Product Backog Item'
+        workItemState: Approved
         workItemKanbanState: 'Dev Done'
         updateAssignedTo: 'Unassigned'
+        linkBuild: true
         updateAssignedToWith: 'Requester'
         updateFields: 'System.Description, Maven Build & Packaging is completed'
         addTags: |
           MavenBuild
           MavenPackaging
- 
+
+
     - task: SonarCloudAnalyze@1
  
     - task: SonarCloudPublish@1
@@ -91,6 +94,7 @@ stages:
       inputs:
         workitemsSource: 'Build'
         workItemType: 'Task, Epic, Product Backog Item'
+        workItemState: Committed
         workItemKanbanState: 'QA Done'
         updateAssignedTo: 'Unassigned'
         updateAssignedToWith: 'Requester'
