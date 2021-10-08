@@ -75,12 +75,10 @@ stages:
     - task: WorkItemUpdater@2
       inputs:
         workitemsSource: 'Build'
-        workItemType: 'Task, User Story'
+        workItemType: 'Task,User Story'
         workItemState: 'Resolved'
-        workItemKanbanState: 'Dev Done'
-        updateAssignedTo: 'Unassigned'
-        linkBuild: true
-        updateAssignedToWith: 'Requester'
+        updateAssignedTo: 'Never'
+        updateAssignedToWith: 'Creator'
         updateFields: 'System.Description, Maven Build & Packaging is completed'
 
 
@@ -94,11 +92,10 @@ stages:
     - task: WorkItemUpdater@2
       inputs:
         workitemsSource: 'Build'
-        workItemType: 'Task, User Story'
+        workItemType: 'Task,User Story'
         workItemState: 'Resolved'
-        workItemKanbanState: 'QA Done'
-        updateAssignedTo: 'Unassigned'
-        updateAssignedToWith: 'Requester'
+        updateAssignedTo: 'Never'
+        updateAssignedToWith: 'Creator'
         updateFields: 'System.Description, SonarCloud Code Coverage & Quality code analysis is completed'
 
   
