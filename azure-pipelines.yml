@@ -78,17 +78,17 @@ stages:
     
     - bash: |
           echo $(Build.SourceVersionMessage)
-          #idvalue=`echo $(Build.SourceVersionMessage) | awk -F"#" '{print $2}'`
-          #echo "${idvalue}"
-          #echo -n 2meijxrdwcazipaluawgwnifojj4fiee3qolgipd2qwlg7lb2fqa | az devops login --organization https://dev.azure.com/GenpactSimulator
-          #az devops configure --defaults organization=https://dev.azure.com/GenpactSimulator project=iacautomation
-          #az boards work-item update --id ${idvalue} --assigned-to "Vibhor Saxena" --description ${2} --state ${1}
-          #echo "updated workitem state and transited to required board column.." 
+          idvalue=`echo $(Build.SourceVersionMessage) | awk -F"#" '{print $1}'`
+          echo "${idvalue}"
+          echo -n 2meijxrdwcazipaluawgwnifojj4fiee3qolgipd2qwlg7lb2fqa | az devops login --organization https://dev.azure.com/GenpactSimulator
+          az devops configure --defaults organization=https://dev.azure.com/GenpactSimulator project=iacautomation
+          az boards work-item update --id ${idvalue} --assigned-to "Vibhor Saxena" --description "Maven Build and Packaging is completed" --state "active"
+          echo "updated workitem state and transited to required board column.." 
 
-    - task: ShellScript@2
-      inputs:
-        scriptPath: /home/vsts/work/1/s/transistworkitems.sh
-        args: '"active" "Maven Build and Packaging is completed"'
+    #- task: ShellScript@2
+      #inputs:
+        #scriptPath: /home/vsts/work/1/s/transistworkitems.sh
+        #args: '"active" "Maven Build and Packaging is completed"'
 
     - task: WorkItemUpdater@2
       inputs:
@@ -108,10 +108,14 @@ stages:
       inputs:
         pollingTimeoutSec: '300'
 
-    - task: ShellScript@2
-      inputs:
-        scriptPath: /home/vsts/work/1/s/transistworkitems.sh
-        args: '"resolved" "SonarCloud Code Coverage and Quality code analysis is completed"'
+    - bash: |
+          echo $(Build.SourceVersionMessage)
+          idvalue=`echo $(Build.SourceVersionMessage) | awk -F"#" '{print $1}'`
+          echo "${idvalue}"
+          echo -n 2meijxrdwcazipaluawgwnifojj4fiee3qolgipd2qwlg7lb2fqa | az devops login --organization https://dev.azure.com/GenpactSimulator
+          az devops configure --defaults organization=https://dev.azure.com/GenpactSimulator project=iacautomation
+          az boards work-item update --id ${idvalue} --assigned-to "Vibhor Saxena" --description "SonarCloud Code Coverage and Quality code analysis is completed" --state "resolved"
+          echo "updated workitem state and transited to required board column.." 
         
     - task: WorkItemUpdater@2
       inputs:
