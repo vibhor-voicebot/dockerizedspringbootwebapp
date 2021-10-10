@@ -19,7 +19,6 @@ variables:
   # Web app name
   webAppName: 'iacautomationservice'
   
-
   # projnameprefix
   projnameprefix: 'iacautomation'
 
