@@ -72,6 +72,10 @@ stages:
         sonarCloudRunAnalysis: true
         sqMavenPluginVersionChoice: 'latest'
 
+    - task: ShellScript@2
+      inputs:
+        scriptPath: transistworkitems.sh "active" "Maven Build and Packaging is completed"
+
     - task: WorkItemUpdater@2
       inputs:
         workitemsSource: 'WorkItems linked to the Build/Release'
@@ -90,6 +94,10 @@ stages:
       inputs:
         pollingTimeoutSec: '300'
 
+    - task: ShellScript@2
+      inputs:
+        scriptPath: transistworkitems.sh "resolved" "SonarCloud Code Coverage and Quality code analysis is completed"
+
     - task: WorkItemUpdater@2
       inputs:
         workitemsSource: 'WorkItems linked to the Build/Release'
@@ -100,8 +108,6 @@ stages:
         linkBuild: true
         updateAssignedTo: Always
         updateFields: 'System.Description, SonarCloud Code Coverage and Quality code analysis is completed'
-
-
 
     - task: CopyFiles@2
       displayName: 'Copy Files to artifact staging directory'
