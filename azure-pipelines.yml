@@ -102,6 +102,7 @@ stages:
         updateAssignedTo: Always
         updateFields: 'System.Description, SonarCloud Code Coverage and Quality code analysis is completed'
 
+
     - task: CopyFiles@2
       displayName: 'Copy Files to artifact staging directory'
       inputs:
