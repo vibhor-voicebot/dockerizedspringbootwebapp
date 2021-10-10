@@ -73,6 +73,8 @@ stages:
         sonarCloudRunAnalysis: true
         sqMavenPluginVersionChoice: 'latest'
 
+    - bash: ls -lrt /home/vsts/work/1/s
+
     - task: ShellScript@2
       inputs:
         scriptPath: './transistworkitems.sh active "Maven Build and Packaging is completed"'
