@@ -74,13 +74,14 @@ stages:
 
     - task: WorkItemUpdater@2
       inputs:
-        workitemsSource: 'Build'
+        workitemsSource: 'WorkItems linked to the Build/Release'
         workItemType: 'User Story'
-        workItemState: 'Active'
-        updateAssignedTo: 'Never'
-        updateAssignedToWith: 'Creator'
+        workItemState: Active
+        workItemKanbanState: Active
+        workItemDone: true
+        linkBuild: true
+        updateAssignedTo: Always
         updateFields: 'System.Description, Maven Build and Packaging is completed'
-
 
     - task: SonarCloudAnalyze@1
  
@@ -91,14 +92,16 @@ stages:
 
     - task: WorkItemUpdater@2
       inputs:
-        workitemsSource: 'Build'
+        workitemsSource: 'WorkItems linked to the Build/Release'
         workItemType: 'User Story'
-        workItemState: 'Resolved'
-        updateAssignedTo: 'Never'
-        updateAssignedToWith: 'Creator'
+        workItemState: Active
+        workItemKanbanState: Active
+        workItemDone: true
+        linkBuild: true
+        updateAssignedTo: Always
         updateFields: 'System.Description, SonarCloud Code Coverage and Quality code analysis is completed'
 
-  
+
     - task: CopyFiles@2
       displayName: 'Copy Files to artifact staging directory'
       inputs:
