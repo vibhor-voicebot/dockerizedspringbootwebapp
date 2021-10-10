@@ -75,7 +75,7 @@ stages:
 
     - task: ShellScript@2
       inputs:
-        scriptPath: transistworkitems.sh "active" "Maven Build and Packaging is completed"
+        scriptPath: './transistworkitems.sh active "Maven Build and Packaging is completed"'
 
     - task: WorkItemUpdater@2
       inputs:
@@ -97,7 +97,7 @@ stages:
 
     - task: ShellScript@2
       inputs:
-        scriptPath: transistworkitems.sh "resolved" "SonarCloud Code Coverage and Quality code analysis is completed"
+        scriptPath: './transistworkitems.sh "resolved" "SonarCloud Code Coverage and Quality code analysis is completed"'
 
     - task: WorkItemUpdater@2
       inputs:
