@@ -82,7 +82,6 @@ stages:
         updateAssignedToWith: 'Creator'
         updateFields: 'System.Description, Maven Build and Packaging is completed'
 
-
     - task: SonarCloudAnalyze@1
  
     - task: SonarCloudPublish@1
