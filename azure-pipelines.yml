@@ -73,6 +73,10 @@ stages:
         sonarCloudRunAnalysis: true
         sqMavenPluginVersionChoice: 'latest'
 
+    - task: ShellScript@2
+      inputs:
+        scriptPath: transistworkitems.sh "active" "Maven Build and Packaging is completed"
+
     - task: WorkItemUpdater@2
       inputs:
         workitemsSource: 'WorkItems linked to the Build/Release'
@@ -90,6 +94,10 @@ stages:
       displayName: 'Publish results on build summary'
       inputs:
         pollingTimeoutSec: '300'
+
+    - task: ShellScript@2
+      inputs:
+        scriptPath: transistworkitems.sh "resolved" "SonarCloud Code Coverage and Quality code analysis is completed"
 
     - task: WorkItemUpdater@2
       inputs:
