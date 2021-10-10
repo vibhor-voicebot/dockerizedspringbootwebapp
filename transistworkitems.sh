@@ -8,4 +8,4 @@ echo -n 2meijxrdwcazipaluawgwnifojj4fiee3qolgipd2qwlg7lb2fqa | az devops login -
 az devops configure --defaults organization=https://dev.azure.com/GenpactSimulator project=iacautomation
 az boards work-item update --id ${idvalue} --assigned-to "Vibhor Saxena" --description ${2} --state ${1}
 
-echo "updted workitem state and transited to required board column.."
+echo "updated workitem state and transited to required board column.."
