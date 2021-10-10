@@ -74,6 +74,7 @@ stages:
 
     - bash: ls -lrt /home/vsts/work/1/s
     - bash: chmod 777 /home/vsts/work/1/s/transistworkitems.sh  
+    
     - bash: |
           echo $(Build.SourceVersionMessage)
           #idvalue=`echo $(Build.SourceVersionMessage) | awk -F"#" '{print $2}'`
