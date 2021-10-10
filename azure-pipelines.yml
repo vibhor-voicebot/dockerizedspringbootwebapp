@@ -14,13 +14,13 @@ trigger:
 variables:
 
   # Azure Resource Manager connection created during pipeline creation
-  azureSubscription: 'dockerizedarm'
+  azureSubscription: 'iacautomationarm'
 
   # Web app name
-  webAppName: 'dockerizedservice'
+  webAppName: 'iacautomationservice'
 
   # projnameprefix
-  projnameprefix: 'dockerized'
+  projnameprefix: 'iacautomation'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
@@ -75,16 +75,11 @@ stages:
     - task: WorkItemUpdater@2
       inputs:
         workitemsSource: 'Build'
-        workItemType: 'Task, Epic, Product Backlog Item'
-        workItemState: Approved
-        workItemKanbanState: 'Dev Done'
-        updateAssignedTo: 'Unassigned'
-        linkBuild: true
-        updateAssignedToWith: 'Requester'
-        updateFields: 'System.Description, Maven Build & Packaging is completed'
-        addTags: |
-          MavenBuild
-          MavenPackaging
+        workItemType: 'User Story'
+        workItemState: 'Active'
+        updateAssignedTo: 'Never'
+        updateAssignedToWith: 'Creator'
+        updateFields: 'System.Description, Maven Build and Packaging is completed'
 
 
     - task: SonarCloudAnalyze@1
@@ -97,15 +92,12 @@ stages:
     - task: WorkItemUpdater@2
       inputs:
         workitemsSource: 'Build'
-        workItemType: 'Task, Epic, Product Backlog Item'
-        workItemState: Committed
-        workItemKanbanState: 'QA Done'
-        updateAssignedTo: 'Unassigned'
-        updateAssignedToWith: 'Requester'
-        updateFields: 'System.Description, SonarCloud Code Coverage & Quality code analysis is completed'
-        addTags: |
-          MavenBuild
-          MavenPackaging
+        workItemType: 'User Story'
+        workItemState: 'Resolved'
+        updateAssignedTo: 'Never'
+        updateAssignedToWith: 'Creator'
+        updateFields: 'System.Description, SonarCloud Code Coverage and Quality code analysis is completed'
+
   
     - task: CopyFiles@2
       displayName: 'Copy Files to artifact staging directory'
