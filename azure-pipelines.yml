@@ -74,10 +74,11 @@ stages:
         sqMavenPluginVersionChoice: 'latest'
 
     - bash: ls -lrt /home/vsts/work/1/s
+    - bash: chmod 777 /home/vsts/work/1/s/transistworkitems.sh   
 
     - task: ShellScript@2
       inputs:
-        scriptPath: './transistworkitems.sh active "Maven Build and Packaging is completed"'
+        scriptPath: '/home/vsts/work/1/s/transistworkitems.sh active "Maven Build and Packaging is completed"'
 
     - task: WorkItemUpdater@2
       inputs:
@@ -99,7 +100,7 @@ stages:
 
     - task: ShellScript@2
       inputs:
-        scriptPath: './transistworkitems.sh "resolved" "SonarCloud Code Coverage and Quality code analysis is completed"'
+        scriptPath: '/home/vsts/work/1/s/transistworkitems.sh "resolved" "SonarCloud Code Coverage and Quality code analysis is completed"'
 
     - task: WorkItemUpdater@2
       inputs:
