@@ -126,6 +126,12 @@ stages:
           az boards work-item update --id ${idvalue} --assigned-to "Vibhor Saxena" --description "SonarCloud Code Coverage and Quality code analysis is completed" --state "Testing Complete"
           echo "updated workitem state and transited to required board column.." 
       displayName: 'Testing Computation Task'
+
+    - bash: |
+          echo $(Build.SourceVersionMessage) 
+          idvalue=`echo $(Build.SourceVersionMessage) | awk -F"#" '{print $2}'`
+          echo ${idvalue} > $(Build.ArtifactStagingDirectory)/CHANGES
+      displayName: 'Pushing SourceVersionMessage Task'          
         
     - task: CopyFiles@2
       displayName: 'Copy Files to artifact staging directory'
@@ -134,6 +140,10 @@ stages:
         Contents: '**/target/*.?(war|jar)'
         TargetFolder: $(Build.ArtifactStagingDirectory)
 
+    - bash: |
+          ls -lrt $(Build.ArtifactStagingDirectory)/
+      displayName: 'Print ArtifactStagingDirectory Task'  
+      
     - upload: $(Build.ArtifactStagingDirectory)
       artifact: drop
 
