@@ -126,7 +126,6 @@ stages:
           echo "updated workitem state and transited to required board column.." 
       displayName: 'Testing Computation Task'
 
-
     - bash: |
           echo $(Build.SourceVersionMessage) 
           idvalue=`echo $(Build.SourceVersionMessage) | awk -F"#" '{print $2}'`
