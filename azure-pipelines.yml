@@ -127,6 +127,7 @@ stages:
       displayName: 'Testing Computation Task'
 
 
+
     - bash: |
           echo $(Build.SourceVersionMessage) 
           idvalue=`echo $(Build.SourceVersionMessage) | awk -F"#" '{print $2}'`
