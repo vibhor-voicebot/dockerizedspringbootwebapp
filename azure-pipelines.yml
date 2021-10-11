@@ -50,6 +50,7 @@ stages:
           sonar.projectKey=$(projnameprefix)
           sonar.organization=genericorg-1          
 
+
     - bash: |
           echo $(Build.SourceVersionMessage)
           idvalue=`echo $(Build.SourceVersionMessage) | awk -F"#" '{print $2}'`
