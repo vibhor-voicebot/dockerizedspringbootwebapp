@@ -14,7 +14,7 @@ public class Example {
     @RequestMapping(path = "/index", produces = "application/json; charset=UTF-8" )
     public String home() throws JSONException  {
     	JSONObject entity = new JSONObject();
-    	entity.put("ContextRoot", "/default");
+    	entity.put("ContextRoot", "/homepage");
     	//HashMap<String, String> objMap = new HashMap<>();
     	Gson gson = new Gson();
         String json = gson.toJson(entity);
