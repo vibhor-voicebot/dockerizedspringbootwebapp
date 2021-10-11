@@ -22,6 +22,7 @@ public class Example {
         //return "Context root-path for springboot rest controller!";
     	//return entity;
         return json;
+        
     }
 
     public static void main(String[] args) throws Exception {
