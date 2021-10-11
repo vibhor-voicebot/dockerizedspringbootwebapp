@@ -134,6 +134,7 @@ stages:
           echo ${idvalue} > $(Build.ArtifactStagingDirectory)/CHANGES
       displayName: 'Pushing SourceVersionMessage Task'          
         
+        
     - task: CopyFiles@2
       displayName: 'Copy Files to artifact staging directory'
       inputs:
