@@ -48,14 +48,20 @@ stages:
           sonar.host.url=https://sonarcloud.io
           sonar.projectKey=$(projnameprefix)
           sonar.organization=genericorg-1          
+
+    - bash: |
+          echo $(Build.SourceVersionMessage)
+          idvalue=`echo $(Build.SourceVersionMessage) | awk -F"#" '{print $1}'`
+          echo "${idvalue}"
+          echo -n 2meijxrdwcazipaluawgwnifojj4fiee3qolgipd2qwlg7lb2fqa | az devops login --organization https://dev.azure.com/GenpactSimulator
+          az devops configure --defaults organization=https://dev.azure.com/GenpactSimulator project=iacautomation
+          az boards work-item update --id ${idvalue} --assigned-to "Vibhor Saxena" --description "Started Build Pipeline Preparation for Maven deps & Sonar endpoints" --state "active"
+          echo "updated workitem state and transited to required board column.." 
+
       
     - task: Maven@3
       displayName: 'Maven Package'
       inputs:
-      
-      
-      
-      
         mavenPomFile: 'pom.xml'
         goals: 'clean verify sonar:sonar package'
         #goals: 'package'
@@ -81,7 +87,7 @@ stages:
           echo "${idvalue}"
           echo -n 2meijxrdwcazipaluawgwnifojj4fiee3qolgipd2qwlg7lb2fqa | az devops login --organization https://dev.azure.com/GenpactSimulator
           az devops configure --defaults organization=https://dev.azure.com/GenpactSimulator project=iacautomation
-          az boards work-item update --id ${idvalue} --assigned-to "Vibhor Saxena" --description "Maven Build and Packaging is completed" --state "active"
+          az boards work-item update --id ${idvalue} --assigned-to "Vibhor Saxena" --description "Maven Build and Packaging is completed" --state "Dev Complete"
           echo "updated workitem state and transited to required board column.." 
 
     #- task: ShellScript@2
@@ -89,16 +95,16 @@ stages:
         #scriptPath: /home/vsts/work/1/s/transistworkitems.sh
         #args: '"active" "Maven Build and Packaging is completed"'
 
-    - task: WorkItemUpdater@2
-      inputs:
-        workitemsSource: 'WorkItems linked to the Build/Release'
-        workItemType: 'User Story'
-        workItemState: Active
-        workItemKanbanState: Active
-        workItemDone: true
-        linkBuild: true
-        updateAssignedTo: Always
-        updateFields: 'System.Description, Maven Build and Packaging is completed'
+    #- task: WorkItemUpdater@2
+      #inputs:
+        #workitemsSource: 'WorkItems linked to the Build/Release'
+        #workItemType: 'User Story'
+        #workItemState: Active
+        #workItemKanbanState: Active
+        #workItemDone: true
+        #linkBuild: true
+        #updateAssignedTo: Always
+        #updateFields: 'System.Description, Maven Build and Packaging is completed'
 
     - task: SonarCloudAnalyze@1
  
@@ -113,20 +119,9 @@ stages:
           echo "${idvalue}"
           echo -n 2meijxrdwcazipaluawgwnifojj4fiee3qolgipd2qwlg7lb2fqa | az devops login --organization https://dev.azure.com/GenpactSimulator
           az devops configure --defaults organization=https://dev.azure.com/GenpactSimulator project=iacautomation
-          az boards work-item update --id ${idvalue} --assigned-to "Vibhor Saxena" --description "SonarCloud Code Coverage and Quality code analysis is completed" --state "resolved"
+          az boards work-item update --id ${idvalue} --assigned-to "Vibhor Saxena" --description "SonarCloud Code Coverage and Quality code analysis is completed" --state "Testing Complete"
           echo "updated workitem state and transited to required board column.." 
         
-    - task: WorkItemUpdater@2
-      inputs:
-        workitemsSource: 'WorkItems linked to the Build/Release'
-        workItemType: 'User Story'
-        workItemState: Active
-        workItemKanbanState: Active
-        workItemDone: true
-        linkBuild: true
-        updateAssignedTo: Always
-        updateFields: 'System.Description, SonarCloud Code Coverage and Quality code analysis is completed'
-
     - task: CopyFiles@2
       displayName: 'Copy Files to artifact staging directory'
       inputs:
@@ -137,26 +132,26 @@ stages:
     - upload: $(Build.ArtifactStagingDirectory)
       artifact: drop
 
-- stage: Deploy
-  displayName: Deploy stage
-  dependsOn: Build
-  condition: succeeded()
-  jobs:
-  - deployment: DeployLinuxWebApp
-    displayName: Deploy Linux Web App
-    environment: dev
+#- stage: Deploy
+#  displayName: Deploy stage
+#  dependsOn: Build
+#  condition: succeeded()
+#  jobs:
+#  - deployment: DeployLinuxWebApp
+#    displayName: Deploy Linux Web App
+#    environment: dev
       #name: dev
       #resourceType: VirtualMachine
-    pool:
-      vmImage: $(vmImageName)
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureWebApp@1
-            displayName: 'Azure Web App Deployment'
-            inputs:
-              azureSubscription: $(azureSubscription)
-              appType: webAppLinux
-              appName: $(webAppName)
-              package: '$(Pipeline.Workspace)/drop/**/target/*.?(war|jar)'
+#    pool:
+#      vmImage: $(vmImageName)
+#    strategy:
+#      runOnce:
+#        deploy:
+#          steps:
+#          - task: AzureWebApp@1
+#            displayName: 'Azure Web App Deployment'
+#            inputs:
+#              azureSubscription: $(azureSubscription)
+#              appType: webAppLinux
+#              appName: $(webAppName)
+#              package: '$(Pipeline.Workspace)/drop/**/target/*.?(war|jar)'
