@@ -15,7 +15,7 @@ public class Example {
     public String home() throws JSONException  {
     	JSONObject entity = new JSONObject();
     	entity.put("ContextRoot", "/landing");
-    	//HashMap<String, String> objMap = new HashMap<>();
+    	HashMap<String, String> objMap = new HashMap<>();
     	Gson gson = new Gson();
         String json = gson.toJson(entity);
         System.out.println(json);
